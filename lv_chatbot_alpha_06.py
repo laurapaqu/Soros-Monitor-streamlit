@@ -41,12 +41,55 @@ st.markdown(
 
     /* Encabezado */
     .title {
-        font-size: 32px;
+        font-size: 52px;
         font-weight: bold;
         color: #1D252C;
         text-align: center;
         padding: 5px;
         border-bottom: 3px solid #E5FF00;
+    }
+    /* Contenedor del banner */
+    .banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #FCFCF7;
+        padding: 10px 20px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    /* Imagen del logo */
+    .banner .logo {
+        width: 150px; /* Ajusta el tamaño del logo */
+        height: auto;
+        margin-bottom: 5px;
+    }
+
+    /* Subtítulo */
+    .banner p {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    /* Línea inferior */
+    .banner .underline {
+        width: 100%;
+        height: 3px;
+        background-color: #E5FF00;
+        margin-top: 5px;
+    }
+
+    /* Ajustar el espacio del contenido para que no se solape con el banner */
+    .content {
+        margin-top: 100px; /* Ajusta este valor según la altura del banner */
     }
 
     /* Mensajes del usuario */
@@ -115,8 +158,17 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Logo de Linterna Verde (si lo quieres agregar)
-st.image("logo_horizontal.png", width=150)
+st.markdown(
+    """
+    <div class="banner">
+        <img src="https://github.com/laurapaqu/Soros-Monitor-streamlit/blob/main/logo_horizontal.png?raw=true" class="logo">
+        <p>Bienvenido/a al Soros Monitor Chatbot</p>
+        <div class="underline"></div>
+    </div>
+    <div class="content">
+    """,
+    unsafe_allow_html=True
+)
 
 # Mensaje de bienvenida
 st.markdown('<p class="title">Bienvenido/a al Soros Monitor Chatbot</p>', unsafe_allow_html=True)
@@ -146,8 +198,6 @@ retriever = db.as_retriever(search_kwargs={"k": 5})
 llm = ChatOpenAI(temperature=0, model="gpt-4-turbo")
 qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever, return_source_documents=True)
 
-# Interfaz con Streamlit
-st.title("Soros Monitor")
 
 # Inicializar el historial de conversación en la sesión
 if "messages" not in st.session_state:
