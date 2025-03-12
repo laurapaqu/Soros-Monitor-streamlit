@@ -69,24 +69,45 @@ st.markdown(
         max-width: 80%;
     }
 
+    /* Contenedor del input y el botón */
+    .chat-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%;
+        margin: 10px auto;
+    }
+
     /* Cuadro de entrada de texto */
-    .stTextInput > div > div > input {
+    .chat-input {
+        flex-grow: 1;
         background-color: white !important;
         border: 2px solid #182828 !important;
-        color: #FFFFFF !important;
-        border-radius: 8px !important;
-        padding: 10px !important;
+        color: #1D252C !important;
+        border-radius: 15px !important;
+        padding: 12px !important;
+        font-size: 16px;
+        outline: none;
+        width: calc(100% - 60px);
     }
 
     /* Botón de enviar */
     .send-button {
-        background: none;
-        border: none;
+        background: #182828;
+        border: 2px solid #182828;
+        border-radius: 8px;
         cursor: pointer;
         margin-left: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background-color: white;
     }
+    
     .send-button img {
-        width: 40px;  /* Tamaño del ícono */
+        width: 40px;
         height: 40px;
     }
     </style>
@@ -145,7 +166,7 @@ st.markdown(
     <div class="chat-container">
         <input type="text" id="user_input" class="chat-input" placeholder="Escribe aquí tu pregunta...">
         <button class="send-button" onclick="sendMessage()">
-            <img src='https://github.com/laurapaqu/Soros-Monitor-streamlit/blob/main/send.png?raw=true'>
+            <img src='https://github.com/laurapaqu/Soros-Monitor-streamlit/blob/main/send.png?raw=true' alt="Enviar">
         </button>
     </div>
     <script>
@@ -161,6 +182,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # Capturar la pregunta desde la URL si el usuario presionó el botón
 query_param = st.query_params.get("query", "")
