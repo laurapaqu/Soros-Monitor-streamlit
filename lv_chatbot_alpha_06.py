@@ -145,7 +145,7 @@ st.markdown(
     <div class="chat-container">
         <input type="text" id="user_input" class="chat-input" placeholder="Escribe aquí tu pregunta...">
         <button class="send-button" onclick="sendMessage()">
-            <img src='https://github.com/laurapaqu/Soros-Monitor-streamlit/blob/main/send.png'>
+            <img src='https://github.com/laurapaqu/Soros-Monitor-streamlit/blob/f9d50ad4f53a42f413e14ddd0f98a6b529372aad/send.png'>
         </button>
     </div>
     <script>
