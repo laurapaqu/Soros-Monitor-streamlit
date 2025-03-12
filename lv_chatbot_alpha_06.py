@@ -33,58 +33,82 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 # Estilos CSS personalizados
 st.markdown(
     """
-        <style>
+    <style>
+    /* Fondo general */
+    .stApp {
+        background-color: #FCFCF7;
+    }
+
+    /* Encabezado */
+    .title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #1D252C;
+        text-align: center;
+        padding: 5px;
+        border-bottom: 3px solid #E5FF00;
+    }
+
+    /* Mensajes del usuario */
+    .message-user {
+        background-color: #182828;
+        color: white;
+        padding: 12px;
+        border-radius: 15px;
+        margin: 10px 0;
+        max-width: 80%;
+    }
+
+    /* Mensajes del chatbot */
+    .message-bot {
+        background-color: #DDD9CE;
+        color: #1D252C;
+        padding: 12px;
+        border-radius: 15px;
+        margin: 10px 0;
+        max-width: 80%;
+    }
+
     /* Contenedor del input y el botón */
     .chat-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 80%;
-        max-width: 600px;
         margin: 10px auto;
-        padding: 8px;
-        border: 2px solid #182828;
-        border-radius: 15px;
-        background-color: white;
     }
 
     /* Cuadro de entrada de texto */
     .chat-input {
         flex-grow: 1;
-        background-color: white;
-        border: none;
-        color: #1D252C;
-        border-radius: 15px;
-        padding: 10px;
+        background-color: white !important;
+        border: 2px solid #182828 !important;
+        color: #1D252C !important;
+        border-radius: 15px !important;
+        padding: 12px !important;
         font-size: 16px;
         outline: none;
         width: 100%;
     }
 
-    /* Contenedor del botón para que no se desplace */
-    .send-button-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     /* Botón de enviar */
     .send-button {
-        background: #182828;
+        background: none;
         border: 2px solid #182828;
         border-radius: 8px;
         cursor: pointer;
+        margin-left: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 44px;
-        height: 44px;
-        margin-left: 10px;
+        width: 48px;
+        height: 48px;
+        background-color: #182828;
     }
     
     .send-button img {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
     </style>
     """,
@@ -141,11 +165,9 @@ st.markdown(
     """
     <div class="chat-container">
         <input type="text" id="user_input" class="chat-input" placeholder="Escribe aquí tu pregunta...">
-        <div class="send-button-container">
-            <button class="send-button" onclick="sendMessage()">
-                <img src='https://github.com/laurapaqu/Soros-Monitor-streamlit/blob/main/send.png?raw=true' alt="Enviar">
-            </button>
-        </div>
+        <button class="send-button" onclick="sendMessage()">
+            <img src='https://github.com/laurapaqu/Soros-Monitor-streamlit/blob/main/send.png?raw=true' alt="Enviar">
+        </button>
     </div>
     <script>
         function sendMessage() {
@@ -160,7 +182,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 
 # Capturar la pregunta desde la URL si el usuario presionó el botón
