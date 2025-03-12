@@ -6,3 +6,4 @@ chromadb
 pandas
 python-dotenv
 openpyxl
+tiktoken
