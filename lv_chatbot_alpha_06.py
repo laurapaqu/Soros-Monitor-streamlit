@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.schema import Document
-from langchain.vectorstores import Chroma
+from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
 from datetime import datetime
@@ -47,7 +47,7 @@ documents = [
     for _, row in df.iterrows()
 ]
 
-db = Chroma.from_documents(documents, embeddings)
+db = FAISS.from_documents(documents, embeddings) 
 retriever = db.as_retriever(search_kwargs={"k": 5})
 st.write(f"📂 Cantidad de documentos indexados en ChromaDB: {len(documents)}")
 
