@@ -34,18 +34,18 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 st.markdown(
     """
     <style>
-    /* Estilo general de la app */
+    /* Fondo general */
     .stApp {
         background-color: #FCFCF7;
     }
 
-    /* Título */
+    /* Encabezado */
     .title {
         font-size: 32px;
         font-weight: bold;
         color: #1D252C;
         text-align: center;
-        padding: 10px;
+        padding: 5px;
         border-bottom: 3px solid #E5FF00;
     }
 
@@ -54,7 +54,7 @@ st.markdown(
         background-color: #FF4B4B;
         color: white;
         padding: 12px;
-        border-radius: 8px;
+        border-radius: 15px;
         margin: 10px 0;
         max-width: 80%;
     }
@@ -64,9 +64,18 @@ st.markdown(
         background-color: #F3F5F6;
         color: #1D252C;
         padding: 12px;
-        border-radius: 8px;
+        border-radius: 15px;
         margin: 10px 0;
         max-width: 80%;
+    }
+
+    /* Cuadro de entrada de texto */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        border: 2px solid #E5FF00 !important;
+        color: #1D252C !important;
+        border-radius: 8px !important;
+        padding: 10px !important;
     }
 
     /* Botón de enviar */
@@ -78,6 +87,10 @@ st.markdown(
         border: none;
         padding: 8px 16px;
         margin-top: 10px;
+        transition: 0.3s;
+    }
+    div.stButton > button:hover {
+        background-color: #D73838;
     }
     </style>
     """,
@@ -110,14 +123,13 @@ documents = [
 
 db = FAISS.from_documents(documents, embeddings) 
 retriever = db.as_retriever(search_kwargs={"k": 5})
-st.write(f"📂 Cantidad de documentos indexados en ChromaDB: {len(documents)}")
 
 # Configura el modelo de lenguaje
 llm = ChatOpenAI(temperature=0, model="gpt-4-turbo")
 qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever, return_source_documents=True)
 
 # Interfaz con Streamlit
-st.title("Chatbot con Streamlit")
+st.title("Soros Monitor")
 
 # Inicializar el historial de conversación en la sesión
 if "messages" not in st.session_state:
