@@ -55,7 +55,7 @@ st.markdown(
         left: 0;
         width: 100%;
         background-color: #FCFCF7;
-        padding: 10px 20px;
+        padding: 20px 20px;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
         text-align: center;
@@ -76,9 +76,9 @@ st.markdown(
     .banner p {
         font-size: 18px;
         font-weight: bold;
-        color: #182828 !important;  /* Asegurar que el texto sea visible */
-        background-color: #D7FC35;  /* Resaltar temporalmente */
-        padding: 5px;
+        color: #182828 !important;
+        background-color: #D7FC35;
+        padding-top: 10px;
     }
 
 
@@ -92,7 +92,7 @@ st.markdown(
 
     /* Ajustar el espacio del contenido para que no se solape con el banner */
     .content {
-        margin-top: 500px;
+        margin-top: 120px;
         padding-top: 20px;
     }
 
