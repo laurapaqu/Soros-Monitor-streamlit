@@ -88,12 +88,12 @@ st.markdown(
         padding: 12px !important;
         font-size: 16px;
         outline: none;
-        width: calc(100% - 60px);
+        width: 100%;
     }
 
     /* Botón de enviar */
     .send-button {
-        background: #182828;
+        background: none;
         border: 2px solid #182828;
         border-radius: 8px;
         cursor: pointer;
@@ -103,7 +103,7 @@ st.markdown(
         justify-content: center;
         width: 48px;
         height: 48px;
-        background-color: white;
+        background-color: #182828;
     }
     
     .send-button img {
