@@ -79,18 +79,15 @@ st.markdown(
     }
 
     /* Botón de enviar */
-    div.stButton > button {
-        background-color: #FF4B4B;
-        color: white;
-        font-size: 16px;
-        border-radius: 8px;
+    .send-button {
+        background: none;
         border: none;
-        padding: 8px 16px;
-        margin-top: 10px;
-        transition: 0.3s;
+        cursor: pointer;
+        margin-left: 10px;
     }
-    div.stButton > button:hover {
-        background-color: #D73838;
+    .send-button img {
+        width: 40px;  /* Tamaño del ícono */
+        height: 40px;
     }
     </style>
     """,
@@ -142,20 +139,41 @@ for msg in st.session_state["messages"]:
     else:
         st.markdown(f'<div class="message-bot">{msg["content"]}</div>', unsafe_allow_html=True)
 
-# Cuadro de entrada para la pregunta
-pregunta = st.text_input("Escribe aquí tu pregunta:")
+# Espacio para la entrada de texto y el botón de imagen
+st.markdown(
+    """
+    <div class="chat-container">
+        <input type="text" id="user_input" class="chat-input" placeholder="Escribe aquí tu pregunta...">
+        <button class="send-button" onclick="sendMessage()">
+            <img src='https://upload.wikimedia.org/wikipedia/commons/e/e7/Arrow_right_font_awesome.svg'>
+        </button>
+    </div>
+    <script>
+        function sendMessage() {
+            let inputField = document.getElementById("user_input");
+            let userMessage = inputField.value;
+            if (userMessage.trim() !== "") {
+                inputField.value = "";
+                window.location.href = "/?query=" + encodeURIComponent(userMessage);
+            }
+        }
+    </script>
+    """,
+    unsafe_allow_html=True
+)
 
-if st.button("Enviar"):
-    if pregunta:
-        # Guardar la pregunta en el historial
-        st.session_state["messages"].append({"role": "user", "content": pregunta})
+# Capturar la pregunta desde la URL si el usuario presionó el botón
+query_param = st.query_params.get("query", "")
+if query_param:
+    pregunta = query_param
+    st.session_state["messages"].append({"role": "user", "content": pregunta})
 
-        # Obtener la respuesta del chatbot
-        resultado = qa.invoke({"question": pregunta, "chat_history": st.session_state["messages"]})
-        respuesta = resultado["answer"]
+    # Obtener la respuesta del chatbot
+    resultado = qa.invoke({"question": pregunta, "chat_history": st.session_state["messages"]})
+    respuesta = resultado["answer"]
 
-        # Guardar la respuesta en el historial
-        st.session_state["messages"].append({"role": "assistant", "content": respuesta})
+    # Guardar la respuesta en el historial
+    st.session_state["messages"].append({"role": "assistant", "content": respuesta})
 
-        # Recargar la página para mostrar los mensajes
-        st.experimental_rerun()
+    # Recargar la página para mostrar los mensajes
+    st.experimental_rerun()
