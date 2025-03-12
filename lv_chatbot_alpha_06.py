@@ -145,7 +145,7 @@ st.markdown(
     <div class="chat-container">
         <input type="text" id="user_input" class="chat-input" placeholder="Escribe aquí tu pregunta...">
         <button class="send-button" onclick="sendMessage()">
-            <img src='https://upload.wikimedia.org/wikipedia/commons/e/e7/Arrow_right_font_awesome.svg'>
+            <img src='send.png'>
         </button>
     </div>
     <script>
