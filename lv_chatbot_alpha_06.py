@@ -76,8 +76,11 @@ st.markdown(
     .banner p {
         font-size: 18px;
         font-weight: bold;
-        margin: 5px 0;
+        color: black !important;  /* Asegurar que el texto sea visible */
+        background-color: yellow;  /* Resaltar temporalmente */
+        padding: 5px;
     }
+
 
     /* Línea inferior */
     .banner .underline {
@@ -248,3 +251,5 @@ if query_param:
 
     # Recargar la página para mostrar los mensajes
     st.experimental_rerun()
+
+st.markdown("</div>", unsafe_allow_html=True)
