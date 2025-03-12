@@ -51,7 +51,7 @@ st.markdown(
 
     /* Mensajes del usuario */
     .message-user {
-        background-color: #FF4B4B;
+        background-color: #182828;
         color: white;
         padding: 12px;
         border-radius: 15px;
@@ -61,7 +61,7 @@ st.markdown(
 
     /* Mensajes del chatbot */
     .message-bot {
-        background-color: #F3F5F6;
+        background-color: #DDD9CE;
         color: #1D252C;
         padding: 12px;
         border-radius: 15px;
@@ -72,8 +72,8 @@ st.markdown(
     /* Cuadro de entrada de texto */
     .stTextInput > div > div > input {
         background-color: white !important;
-        border: 2px solid #E5FF00 !important;
-        color: #1D252C !important;
+        border: 2px solid #182828 !important;
+        color: #FFFFFF !important;
         border-radius: 8px !important;
         padding: 10px !important;
     }
