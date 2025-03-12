@@ -76,8 +76,8 @@ st.markdown(
     .banner p {
         font-size: 18px;
         font-weight: bold;
-        color: black !important;  /* Asegurar que el texto sea visible */
-        background-color: yellow;  /* Resaltar temporalmente */
+        color: #182828 !important;  /* Asegurar que el texto sea visible */
+        background-color: #D7FC35;  /* Resaltar temporalmente */
         padding: 5px;
     }
 
