@@ -1,5 +1,5 @@
 import streamlit as st
-import openai  # Si usas OpenAI, asegúrate de configurar tu API Key
+import openai
 import pandas as pd
 import os
 from dotenv import load_dotenv
@@ -30,6 +30,67 @@ column_labels = {
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
+# Estilos CSS personalizados
+st.markdown(
+    """
+    <style>
+    /* Estilo general de la app */
+    .stApp {
+        background-color: #FCFCF7;
+    }
+
+    /* Título */
+    .title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #1D252C;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 3px solid #E5FF00;
+    }
+
+    /* Mensajes del usuario */
+    .message-user {
+        background-color: #FF4B4B;
+        color: white;
+        padding: 12px;
+        border-radius: 8px;
+        margin: 10px 0;
+        max-width: 80%;
+    }
+
+    /* Mensajes del chatbot */
+    .message-bot {
+        background-color: #F3F5F6;
+        color: #1D252C;
+        padding: 12px;
+        border-radius: 8px;
+        margin: 10px 0;
+        max-width: 80%;
+    }
+
+    /* Botón de enviar */
+    div.stButton > button {
+        background-color: #FF4B4B;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        padding: 8px 16px;
+        margin-top: 10px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Logo de Linterna Verde (si lo quieres agregar)
+st.image("logo_horizontal.png", width=150)
+
+# Mensaje de bienvenida
+st.markdown('<p class="title">Bienvenido/a al Soros Monitor Chatbot</p>', unsafe_allow_html=True)
+
+
 # Cargar datos (suponiendo que tienes el archivo localmente)
 file_path = "DS_Soros_Monitor.v07.xlsx"
 df = pd.read_excel(file_path)
@@ -58,29 +119,31 @@ qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever, return_
 # Interfaz con Streamlit
 st.title("Chatbot con Streamlit")
 
+# Inicializar el historial de conversación en la sesión
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
 
-# Mostrar el historial de mensajes
+# Mostrar el historial de conversación
 for msg in st.session_state["messages"]:
-    with st.chat_message(msg["role"]):
-        st.markdown(msg["content"])
+    if msg["role"] == "user":
+        st.markdown(f'<div class="message-user">{msg["content"]}</div>', unsafe_allow_html=True)
+    else:
+        st.markdown(f'<div class="message-bot">{msg["content"]}</div>', unsafe_allow_html=True)
 
-# Entrada del usuario
-if prompt := st.chat_input("Haz una pregunta..."):
-    st.session_state["messages"].append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-    
-    # Obtener respuesta del chatbot
-    chat_history_tuples = [(msg["role"], msg["content"]) for msg in st.session_state["messages"]]
-    result = qa.invoke({"question": prompt, "chat_history": chat_history_tuples})
-    response = result["answer"]
-    st.write("📄 Documentos Recuperados:")
-    for doc in result["source_documents"]:
-        st.write(f"🔹 {doc.page_content[:500]}")  # Muestra un fragmento de cada documento
-        st.write(f"📌 Fuente: {doc.metadata.get('source', 'Desconocida')}")
-    
-    st.session_state["messages"].append({"role": "assistant", "content": response})
-    with st.chat_message("assistant"):
-        st.markdown(response)
+# Cuadro de entrada para la pregunta
+pregunta = st.text_input("Escribe aquí tu pregunta:")
+
+if st.button("Enviar"):
+    if pregunta:
+        # Guardar la pregunta en el historial
+        st.session_state["messages"].append({"role": "user", "content": pregunta})
+
+        # Obtener la respuesta del chatbot
+        resultado = qa.invoke({"question": pregunta, "chat_history": st.session_state["messages"]})
+        respuesta = resultado["answer"]
+
+        # Guardar la respuesta en el historial
+        st.session_state["messages"].append({"role": "assistant", "content": respuesta})
+
+        # Recargar la página para mostrar los mensajes
+        st.experimental_rerun()
