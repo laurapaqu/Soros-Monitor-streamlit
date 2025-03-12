@@ -77,7 +77,6 @@ st.markdown(
         font-size: 25px;
         font-weight: bold;
         color: #182828 !important;
-        background-color: #D7FC35;
         padding-top: 10px;
     }
 
