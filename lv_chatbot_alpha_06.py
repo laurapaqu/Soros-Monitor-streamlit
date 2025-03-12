@@ -89,7 +89,7 @@ st.markdown(
 
     /* Ajustar el espacio del contenido para que no se solape con el banner */
     .content {
-        margin-top: 70px; /* Reducimos el espacio */
+        margin-top: 120px; /* Reducimos el espacio */
         padding-top: 20px;
     }
 
@@ -162,17 +162,15 @@ st.markdown(
 st.markdown(
     """
     <div class="banner">
-        <img src="https://github.com/laurapaqu/Soros-Monitor-streamlit/blob/main/logo_horizontal.png?raw=true" class="logo">
+        <div class="logo-container">
+            <img src="https://github.com/laurapaqu/Soros-Monitor-streamlit/blob/main/logo_horizontal.png?raw=true" class="logo">
+        </div>
         <p>Bienvenido/a al Soros Monitor Chatbot</p>
         <div class="underline"></div>
     </div>
-    <div class="content">
     """,
     unsafe_allow_html=True
 )
-
-# Mensaje de bienvenida
-st.markdown('<p class="title">Bienvenido/a al Soros Monitor Chatbot</p>', unsafe_allow_html=True)
 
 
 # Cargar datos (suponiendo que tienes el archivo localmente)
