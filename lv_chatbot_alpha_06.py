@@ -55,7 +55,7 @@ st.markdown(
         left: 0;
         width: 100%;
         background-color: #FCFCF7;
-        padding: 20px 20px;
+        padding: 15px 20px;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
         text-align: center;
@@ -74,7 +74,7 @@ st.markdown(
 
     /* Subtítulo */
     .banner p {
-        font-size: 18px;
+        font-size: 25px;
         font-weight: bold;
         color: #182828 !important;
         background-color: #D7FC35;
