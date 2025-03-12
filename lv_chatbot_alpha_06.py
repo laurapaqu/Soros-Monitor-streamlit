@@ -89,7 +89,7 @@ st.markdown(
 
     /* Ajustar el espacio del contenido para que no se solape con el banner */
     .content {
-        margin-top: 200px;
+        margin-top: 500px;
         padding-top: 20px;
     }
 
