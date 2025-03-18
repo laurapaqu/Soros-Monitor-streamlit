@@ -49,14 +49,13 @@ documents = [
 
 db = FAISS.from_documents(documents, embeddings) 
 retriever = db.as_retriever(search_kwargs={"k": 5})
-st.write(f"📂 Cantidad de documentos indexados en ChromaDB: {len(documents)}")
 
 # Configura el modelo de lenguaje
 llm = ChatOpenAI(temperature=0, model="gpt-4-turbo")
 qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever, return_source_documents=True)
 
 # Interfaz con Streamlit
-st.title("Chatbot con Streamlit")
+st.title("Soros Monitor LLM")
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
